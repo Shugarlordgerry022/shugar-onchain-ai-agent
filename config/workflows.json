@@ -1,0 +1,38 @@
+{
+  "agentId": "shugar-trader-001",
+  "agentName": "Shugar Onchain AI Agent",
+  "description": "Autonomous workflow execution for DeFi operations",
+  "workflows": [
+    {
+      "id": "dca-eth",
+      "name": "Dollar Cost Averaging - ETH",
+      "description": "Buy ETH every day if price drops below threshold",
+      "enabled": true,
+      "triggers": [
+        {
+          "type": "time",
+          "value": "0 0 * * *",
+          "description": "Daily at midnight UTC"
+        }
+      ],
+      "conditions": [
+        {
+          "type": "price",
+          "token": "ETH",
+          "operator": "<",
+          "value": 3200,
+          "description": "Execute only if ETH < $3200"
+        }
+      ],
+      "actions": [
+        {
+          "type": "trade",
+          "tokenIn": "USDT",
+          "tokenOut": "ETH",
+          "amount": 0.5,
+          "slippage": 1.0
+        }
+      ]
+    }
+  ]
+}
